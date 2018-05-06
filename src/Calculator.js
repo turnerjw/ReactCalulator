@@ -29,7 +29,7 @@ class Calculator extends Component {
     } else if (i === "×") {
       alert("multiply");
     } else if (i === "=") {
-      alert("equals");
+      this.equals();
     } else if (i === ".") {
       alert("decimal");
     } else {
@@ -58,6 +58,18 @@ class Calculator extends Component {
     this.setState({
       lastOperation: "+"
     });
+  }
+
+  equals() {
+    const lastOperation = this.state.lastOperation;
+    const storedNumber = this.state.storedNumber;
+    const displayedNumber = this.state.displayedNumber;
+    if (lastOperation === "+") {
+      this.setState({
+        displayedNumber: storedNumber + displayedNumber,
+        storedNumber: displayedNumber + storedNumber
+      });
+    }
   }
 
   clearDisplay() {
