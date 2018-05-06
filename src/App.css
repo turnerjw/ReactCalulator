@@ -1,7 +1,6 @@
 .App {
   text-align: center;
   background: linear-gradient(to bottom right, #0085b7, #bec196);
-  width: 100vh;
   height: 100vh;
   padding: 2rem;
 }

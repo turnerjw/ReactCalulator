@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Calculator.css";
 import Display from "./Display.js";
 import Button from "./Button.js";
 

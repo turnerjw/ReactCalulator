@@ -1,0 +1,6 @@
+.row {
+  display: flex;
+  width: 15rem;
+  justify-content: space-between;
+  margin: 0.5rem auto;
+}
