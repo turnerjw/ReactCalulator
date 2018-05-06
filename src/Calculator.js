@@ -11,8 +11,8 @@ class Calculator extends Component {
     };
   }
 
-  renderButton(i) {
-    return <Button text={i} onClick={() => this.handleClick(i)} />;
+  renderButton(i, c) {
+    return <Button clear={c} text={i} onClick={() => this.handleClick(i)} />;
   }
 
   handleClick(i) {
@@ -26,6 +26,7 @@ class Calculator extends Component {
     return (
       <div>
         <Display text={this.state.display} />
+        <div className="row">{this.renderButton("Clear", true)}</div>
         <div className="row">
           {this.renderButton(7)}
           {this.renderButton(8)}

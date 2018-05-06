@@ -3,8 +3,13 @@ import "./Button.css";
 
 class Button extends Component {
   render() {
+    let className = "Button";
+    if (this.props.clear) {
+      className += " clear";
+    }
+
     return (
-      <button className="Button" onClick={this.props.onClick}>
+      <button className={className} onClick={this.props.onClick}>
         {this.props.text}
       </button>
     );

@@ -9,6 +9,13 @@
   margin: 0.1rem;
 }
 
+.clear {
+  background: linear-gradient(to right, #ffdcab80, #ffa70099);
+  width: 100%;
+  height: initial;
+  border: none;
+}
+
 .Button:active {
   background: white;
   color: black;
