@@ -7,7 +7,9 @@ class Calculator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      display: ""
+      displayedNumber: 0,
+      storedNumber: null,
+      lastOperation: null
     };
   }
 
@@ -16,16 +18,59 @@ class Calculator extends Component {
   }
 
   handleClick(i) {
-    const current = this.state.display;
+    if (i === "Clear") {
+      this.clearDisplay();
+    } else if (i === "+") {
+      this.plus();
+    } else if (i === "-") {
+      alert("minus");
+    } else if (i === "÷") {
+      alert("divide");
+    } else if (i === "×") {
+      alert("multiply");
+    } else if (i === "=") {
+      alert("equals");
+    } else if (i === ".") {
+      alert("decimal");
+    } else {
+      const current = this.state.displayedNumber * 10 + i;
+
+      this.setState({
+        displayedNumber: current
+      });
+    }
+  }
+
+  plus() {
+    const storedNumber = this.state.storedNumber;
+    const displayedNumber = this.state.displayedNumber;
+    if (storedNumber) {
+      this.setState({
+        storedNumber: storedNumber + displayedNumber,
+        displayedNumber: 0
+      });
+    } else {
+      this.setState({
+        storedNumber: displayedNumber,
+        displayedNumber: 0
+      });
+    }
     this.setState({
-      display: current + i
+      lastOperation: "+"
+    });
+  }
+
+  clearDisplay() {
+    this.setState({
+      displayedNumber: 0,
+      storedNumber: 0
     });
   }
 
   render() {
     return (
       <div>
-        <Display text={this.state.display} />
+        <Display text={this.state.displayedNumber} />
         <div className="row">{this.renderButton("Clear", true)}</div>
         <div className="row">
           {this.renderButton(7)}
