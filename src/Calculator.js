@@ -7,6 +7,7 @@ class Calculator extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      display: "",
       displayedNumber: 0,
       storedNumber: null,
       lastOperation: null
@@ -33,10 +34,11 @@ class Calculator extends Component {
     } else if (i === ".") {
       alert("decimal");
     } else {
-      const current = this.state.displayedNumber * 10 + i;
+      const displayedNumber = this.state.displayedNumber * 10 + i;
 
       this.setState({
-        displayedNumber: current
+        display: displayedNumber,
+        displayedNumber: displayedNumber
       });
     }
   }
@@ -66,7 +68,8 @@ class Calculator extends Component {
     const displayedNumber = this.state.displayedNumber;
     if (lastOperation === "+") {
       this.setState({
-        displayedNumber: storedNumber + displayedNumber,
+        display: displayedNumber + storedNumber,
+        displayedNumber: 0,
         storedNumber: displayedNumber + storedNumber
       });
     }
@@ -74,15 +77,17 @@ class Calculator extends Component {
 
   clearDisplay() {
     this.setState({
+      display: "",
       displayedNumber: 0,
-      storedNumber: 0
+      storedNumber: 0,
+      lastOperation: ""
     });
   }
 
   render() {
     return (
       <div>
-        <Display text={this.state.displayedNumber} />
+        <Display text={this.state.display} />
         <div className="row">{this.renderButton("Clear", true)}</div>
         <div className="row">
           {this.renderButton(7)}
