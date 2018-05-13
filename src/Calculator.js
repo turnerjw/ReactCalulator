@@ -21,16 +21,11 @@ class Calculator extends Component {
   handleClick(i) {
     if (i === "Clear") {
       this.clearDisplay();
-    } else if (i === "+") {
-      this.plus();
-    } else if (i === "-") {
-      alert("minus");
-    } else if (i === "÷") {
-      alert("divide");
-    } else if (i === "×") {
-      alert("multiply");
-    } else if (i === "=") {
-      this.equals();
+    } else if (i === "+" || i === "-" || i === "÷" || i === "×" || i === "=") {
+      this.evaluate();
+      this.setState({
+        lastOperation: i
+      });
     } else if (i === ".") {
       alert("decimal");
     } else {
@@ -43,34 +38,40 @@ class Calculator extends Component {
     }
   }
 
-  plus() {
+  evaluate() {
+    const lastOperation = this.state.lastOperation;
     const storedNumber = this.state.storedNumber;
     const displayedNumber = this.state.displayedNumber;
-    if (storedNumber) {
-      this.setState({
-        storedNumber: storedNumber + displayedNumber,
-        displayedNumber: 0
-      });
+    if (storedNumber !== null) {
+      if (lastOperation === "+") {
+        this.setState({
+          display: displayedNumber + storedNumber,
+          displayedNumber: 0,
+          storedNumber: displayedNumber + storedNumber
+        });
+      } else if (lastOperation === "-") {
+        this.setState({
+          display: storedNumber - displayedNumber,
+          displayedNumber: 0,
+          storedNumber: storedNumber - displayedNumber
+        });
+      } else if (lastOperation === "÷") {
+        this.setState({
+          display: storedNumber / displayedNumber,
+          displayedNumber: 0,
+          storedNumber: storedNumber / displayedNumber
+        });
+      } else if (lastOperation === "×") {
+        this.setState({
+          display: storedNumber * displayedNumber,
+          displayedNumber: 0,
+          storedNumber: storedNumber * displayedNumber
+        });
+      }
     } else {
       this.setState({
         storedNumber: displayedNumber,
         displayedNumber: 0
-      });
-    }
-    this.setState({
-      lastOperation: "+"
-    });
-  }
-
-  equals() {
-    const lastOperation = this.state.lastOperation;
-    const storedNumber = this.state.storedNumber;
-    const displayedNumber = this.state.displayedNumber;
-    if (lastOperation === "+") {
-      this.setState({
-        display: displayedNumber + storedNumber,
-        displayedNumber: 0,
-        storedNumber: displayedNumber + storedNumber
       });
     }
   }
@@ -79,7 +80,7 @@ class Calculator extends Component {
     this.setState({
       display: "",
       displayedNumber: 0,
-      storedNumber: 0,
+      storedNumber: null,
       lastOperation: ""
     });
   }
