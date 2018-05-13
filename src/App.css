@@ -3,6 +3,7 @@
   background: linear-gradient(to bottom right, #0085b7, #bec196);
   height: 100vh;
   padding: 2rem;
+  box-sizing: border-box;
 }
 
 .App-logo {
