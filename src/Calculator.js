@@ -10,7 +10,8 @@ class Calculator extends Component {
       display: "",
       displayedNumber: 0,
       storedNumber: null,
-      lastOperation: null
+      lastOperation: null,
+      isDecimal: false
     };
   }
 
@@ -24,17 +25,29 @@ class Calculator extends Component {
     } else if (i === "+" || i === "-" || i === "÷" || i === "×" || i === "=") {
       this.evaluate();
       this.setState({
-        lastOperation: i
+        lastOperation: i,
+        isDecimal: false
       });
     } else if (i === ".") {
-      alert("decimal");
-    } else {
-      const displayedNumber = this.state.displayedNumber * 10 + i;
-
+      const displayedNumber = this.state.displayedNumber;
       this.setState({
         display: displayedNumber,
-        displayedNumber: displayedNumber
+        isDecimal: true
       });
+    } else {
+      const isDecimal = this.state.isDecimal;
+      const displayedNumber = this.state.displayedNumber;
+      if (isDecimal) {
+        this.setState({
+          display: displayedNumber + i / 10,
+          displayedNumber: displayedNumber + i / 10
+        });
+      } else {
+        this.setState({
+          display: displayedNumber * 10 + i,
+          displayedNumber: displayedNumber * 10 + i
+        });
+      }
     }
   }
 
@@ -81,7 +94,8 @@ class Calculator extends Component {
       display: "",
       displayedNumber: 0,
       storedNumber: null,
-      lastOperation: ""
+      lastOperation: "",
+      isDecimal: false
     });
   }
 
